@@ -4,7 +4,7 @@
 
 **Software engineer · CS graduate, Newcastle University · Looking for 2027 grad roles in bank & fintech tech**
 
-<a href="LINKEDIN_URL_HERE"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"></a>
+<a href="https://www.linkedin.com/in/kevin-steepan/"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"></a>
 <a href="mailto:ksteepan14@icloud.com"><img src="https://img.shields.io/badge/Email-333333?style=for-the-badge&logo=icloud&logoColor=white" alt="Email"></a>
 <a href="https://london-rent-reality-check-jikdwpaozdee8hvjjccgaa.streamlit.app"><img src="https://img.shields.io/badge/Try_my_live_demo-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white" alt="Live demo"></a>
 
