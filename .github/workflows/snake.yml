@@ -2,8 +2,8 @@ name: Generate contribution snake
 
 on:
   schedule:
-    - cron: "0 0 * * *"   # once a day
-  workflow_dispatch:       # lets you run it manually from the Actions tab
+    - cron: "0 */6 * * *"   # every 6 hours, so new commits show up the same day
+  workflow_dispatch:         # run it manually from the Actions tab
   push:
     branches: [main]
 
@@ -17,13 +17,15 @@ jobs:
       - uses: Platane/snk@v3
         with:
           github_user_name: ${{ github.repository_owner }}
+          # Blue snake to match the typing intro (#3B82F6)
           outputs: |
-            dist/github-contribution-grid-snake.svg
-            dist/github-contribution-grid-snake-dark.svg?palette=github-dark
+            dist/github-contribution-grid-snake.svg?color_snake=#3B82F6
+            dist/github-contribution-grid-snake-dark.svg?palette=github-dark&color_snake=#60A5FA
 
       - uses: crazy-max/ghaction-github-pages@v4
         with:
           target_branch: output
           build_dir: dist
+          commit_message: "Update contribution snake"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
