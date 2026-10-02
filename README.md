@@ -2,7 +2,7 @@
 
 <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=24&duration=3500&pause=1200&color=3B82F6&center=true&vCenter=true&width=700&lines=Hi%2C+I'm+Kevin+%F0%9F%91%8B;CS+grad+%C2%B7+building+finance-tech+tools;I+built+a+mini+bank%2C+then+attacked+it;I+teach+AI+agents+when+to+ask+a+human;Open+to+2027+grad+roles+in+bank+tech" alt="Hi, I'm Kevin. CS grad from Newcastle building finance-tech tools. I built a mini bank, then attacked it. I teach AI agents when to ask a human. Open to 2027 grad roles in SWE/ML/AI." />
 
-**Software engineer · CS graduate, Newcastle University · Looking for 2027 grad roles in bank & fintech tech**
+**Software engineer · CS graduate, Newcastle University · Looking for 2027 grad roles in bank & fintech**
 
 <a href="https://www.linkedin.com/in/kevin-steepan/"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"></a>
 <a href="mailto:ksteepan14@icloud.com"><img src="https://img.shields.io/badge/Email-333333?style=for-the-badge&logo=icloud&logoColor=white" alt="Email"></a>
