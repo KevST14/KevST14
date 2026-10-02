@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=26&duration=3000&pause=800&color=3B82F6&center=true&vCenter=true&width=600&lines=Hey%2C+I'm+Kevin+%F0%9F%91%8B;I+build+finance-tech+tools;I+make+AI+agents+ask+before+they+act;Is+that+number+actually+trustworthy%3F" alt="Typing intro" />
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=24&duration=3500&pause=1200&color=3B82F6&center=true&vCenter=true&width=700&lines=Hi%2C+I'm+Kevin+%F0%9F%91%8B;CS+grad+%C2%B7+building+finance-tech+tools;I+built+a+mini+bank%2C+then+attacked+it;I+teach+AI+agents+when+to+ask+a+human;Open+to+2027+grad+roles+in+bank+tech" alt="Hi, I'm Kevin. CS grad building finance-tech tools. I built a mini bank, then attacked it. I teach AI agents when to ask a human. Open to 2027 grad roles in bank tech." />
 
 **Software engineer · CS graduate, Newcastle University · Looking for 2027 grad roles in bank & fintech tech**
 
@@ -12,7 +12,7 @@
 
 ---
 
-I like problems where a number *looks* right but might not be. That's taken me into prediction markets, explainable pricing models, and a dissertation on stopping AI agents from doing something stupid with money.
+I like problems where a number *looks* right but might not be. That's taken me into prediction markets, explainable pricing models, a from-scratch bank ledger where the books have to balance after every single test, and a dissertation on stopping AI agents from doing something stupid with money.
 
 ## 🎲 Quick calibration test
 
@@ -27,14 +27,21 @@ If I'd hedged at 50% I'd have scored 0.25, and if I'd said 10% I'd have scored 0
 </details>
 
 <details>
-<summary><b>Q2.</b> Pricing a London Airbnb: what helps the model more, <i>where</i> it is or <i>how the listing is written</i>?</summary>
+<summary><b>Q2.</b> You tap "pay", your phone loses signal, and the app sends the request again. How many times should you be charged?</summary>
+<br>
+
+**Once.** Every payment carries an *idempotency key*, so a retry returns the original transfer instead of paying twice. In [Clearhouse](https://github.com/KevST14/clearhouse) I test this by firing 20 identical requests at the same key from eight threads at once. Exactly one goes through.
+</details>
+
+<details>
+<summary><b>Q3.</b> Pricing a London Airbnb: what helps the model more, <i>where</i> it is or <i>how the listing is written</i>?</summary>
 <br>
 
 **Where it is.** Adding location features (distance to stations, parks, food) pushed R² from 0.62 to 0.65. Analysing the listing text added only about £1–2 a night. Clever copywriting doesn't change much. [See for yourself in the live demo ↗](https://london-rent-reality-check-jikdwpaozdee8hvjjccgaa.streamlit.app)
 </details>
 
 <details>
-<summary><b>Q3.</b> An AI agent is 60% sure a payment is legit. Should it send the money?</summary>
+<summary><b>Q4.</b> An AI agent is 60% sure a payment is legit. Should it send the money?</summary>
 <br>
 
 **Not on its own.** That's the question my dissertation is about: stack independent checks, and when the agent's uncertainty crosses a threshold, it escalates to a human instead of guessing. Scroll down for the diagram.
@@ -43,6 +50,43 @@ If I'd hedged at 50% I'd have scored 0.25, and if I'd said 10% I'd have scored 0
 ## 🔨 Things I've built
 
 <details open>
+<summary><h3>🏦 Clearhouse: a tiny bank, and the fraud hiding in it</h3></summary>
+
+![Java](https://img.shields.io/badge/Java_21-ED8B00?style=flat-square&logo=openjdk&logoColor=white)
+![Spring Boot](https://img.shields.io/badge/Spring_Boot-6DB33F?style=flat-square&logo=springboot&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=flat-square&logo=postgresql&logoColor=white)
+![Redpanda](https://img.shields.io/badge/Redpanda_(Kafka)-E4405F?style=flat-square&logo=apachekafka&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white)
+![React](https://img.shields.io/badge/React-20232A?style=flat-square&logo=react&logoColor=61DAFB)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white)
+
+A small, working model of a bank's back office. A double-entry ledger moves money in whole pence with idempotency keys and row locking, a transactional outbox announces every transfer on an event stream, and a simulated town of 120 customers and 22 shops pays its way through it. Then you can launch fraud on demand (card testing, a money mule ring, an account takeover) and watch each one draw its own shape in a live control room.
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/KevST14/clearhouse/main/docs/dashboard-dark.png">
+  <img alt="Clearhouse control room with three fraud attacks highlighted in the live money-flow network" src="https://raw.githubusercontent.com/KevST14/clearhouse/main/docs/dashboard-light.png">
+</picture>
+
+```mermaid
+flowchart LR
+    G[Traffic generator] -->|pay + idempotency key| L[Ledger · Spring Boot]
+    L -->|debit, credit + event<br/>in one transaction| P[(Postgres)]
+    L -->|outbox publisher| R[[Redpanda]]
+    G -->|true label| K[(Answer key)]
+    G -->|live stream| D[Control room]
+    R -.->|next| A[AI fraud analyst]
+    K -.->|scored against| A
+```
+
+- **The books must balance:** after *every* test, every transfer nets to zero and every currency sums to zero, checked against real Postgres via Testcontainers.
+- **Learned the hard way:** optimistic locking fell over on hot accounts under an 8-thread test, so I switched to ordered pessimistic locks. CI on Linux also caught a nanosecond-vs-microsecond timestamp bug my Mac never showed.
+- **Next up:** a dbt/DuckDB pipeline over the event stream, then an AI fraud analyst graded on precision and recall against the answer key.
+
+**[→ View repo](https://github.com/KevST14/clearhouse)**
+</details>
+
+<details>
 <summary><h3>📈 Split Decision: can you beat a prediction market?</h3></summary>
 
 ![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white)
@@ -83,6 +127,27 @@ Give it a London short-let and it predicts a fair nightly price from Inside Airb
 </details>
 
 <details>
+<summary><h3>📰 Patch Notes: patch notes for the tech world</h3></summary>
+
+![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white)
+![React](https://img.shields.io/badge/React-20232A?style=flat-square&logo=react&logoColor=61DAFB)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)
+![SQLite](https://img.shields.io/badge/SQLite-003B57?style=flat-square&logo=sqlite&logoColor=white)
+
+A personal news dashboard that pulls the day's stories from Hacker News, Lobsters, GitHub and a dozen outlets, groups coverage of the same story, learns what you care about, and spots the names that are suddenly everywhere. No accounts, no API keys, no tracking.
+
+![Patch Notes today view](https://raw.githubusercontent.com/KevST14/patchnotes/main/docs/today.jpg)
+
+- **Story clustering:** TF-IDF headline similarity with name boosting and centroid matching, so three outlets covering one earnings call become one card, while two different "critical flaw" stories stay apart.
+- **An explainable "For You" feed:** a transparent average over keeps, skips and saves that tells you *why* each story is there. No black box.
+- **Trend radar:** terms showing up more than usual across at least two sources, measured against a per-source baseline so a fresh install doesn't think everything is exploding.
+- **Plus:** a swipeable catch-up deck with hand-rolled spring physics, and a weekly headline quiz.
+
+**[→ View repo](https://github.com/KevST14/patchnotes)**
+</details>
+
+<details>
 <summary><h3>💷 SpendSync: personal finance dashboard</h3></summary>
 
 ![Next.js](https://img.shields.io/badge/Next.js-000000?style=flat-square&logo=nextdotjs&logoColor=white)
@@ -115,7 +180,7 @@ Rather than trusting one model to get it right, the architecture puts independen
 
 <div align="center">
 
-<img src="https://skillicons.dev/icons?i=python,ts,js,java,react,nextjs,tailwind,vite,fastapi,postgres,sqlite,prisma,sklearn,git&perline=7" alt="Tech stack" />
+<img src="https://skillicons.dev/icons?i=python,java,ts,js,react,nextjs,spring,fastapi,postgres,sqlite,prisma,kafka,docker,sklearn,tailwind,vite,d3,git&perline=9" alt="Tech stack" />
 
 </div>
 
@@ -131,5 +196,5 @@ Rather than trusting one model to get it right, the architecture puts independen
 ---
 
 <div align="center">
-<i>Happy to chat about markets, models, or agents that know their limits.</i>
+<i>Happy to chat about markets, models, ledgers, or agents that know their limits.</i>
 </div>
