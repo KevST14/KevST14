@@ -1,8 +1,8 @@
 <div align="center">
 
-<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=24&duration=3500&pause=1200&color=3B82F6&center=true&vCenter=true&width=700&lines=Hi%2C+I'm+Kevin+%F0%9F%91%8B;CS+grad+from+Newcastle;Currently+building+a+mini+bank+%28and+attacking+it%29;Looking+for+2027+grad+roles+in+bank+tech" alt="Hi, I'm Kevin. CS grad from Newcastle. Currently building a mini bank (and attacking it). Looking for 2027 grad roles in bank tech." />
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=24&duration=3500&pause=1200&color=3B82F6&center=true&vCenter=true&width=700&lines=Hi%2C+I'm+Kevin+%F0%9F%91%8B;CS+grad+from+Newcastle;Building+payment+and+fraud+systems;Interested+in+fintech+and+AI+safety" alt="Hi, I'm Kevin. CS grad from Newcastle. Building payment and fraud systems. Interested in fintech and AI safety." />
 
-**Software engineer · Newcastle University CS grad · Looking for 2027 grad roles in bank tech and fintech**
+**SWE/DA enthusiast · Newcastle University CS grad · Fintech, fraud and AI safety · Interested in ML/AI & Fintech**
 
 <a href="https://www.linkedin.com/in/kevin-steepan/"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"></a>
 <a href="mailto:ksteepan14@icloud.com"><img src="https://img.shields.io/badge/Email-333333?style=for-the-badge&logo=icloud&logoColor=white" alt="Email"></a>
@@ -197,5 +197,5 @@ The idea is that you shouldn't rely on one model always getting it right. Every 
 ---
 
 <div align="center">
-<i>If you're hiring for grad roles in bank tech or fintech, or just want to talk about any of this, my email and LinkedIn are at the top.</i>
+<i>If you want to talk about any of this, my email and LinkedIn are at the top.</i>
 </div>
