@@ -1,8 +1,8 @@
 <div align="center">
 
-<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=24&duration=3500&pause=1200&color=3B82F6&center=true&vCenter=true&width=700&lines=Hi%2C+I'm+Kevin+%F0%9F%91%8B;CS+grad+%C2%B7+building+finance-tech+tools;I+built+a+mini+bank%2C+then+attacked+it;I+teach+AI+agents+when+to+ask+a+human;Open+to+2027+grad+roles+in+bank+tech" alt="Hi, I'm Kevin. CS grad from Newcastle building finance-tech tools. I built a mini bank, then attacked it. I teach AI agents when to ask a human. Open to 2027 grad roles in SWE/ML/AI." />
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=24&duration=3500&pause=1200&color=3B82F6&center=true&vCenter=true&width=700&lines=Hi%2C+I'm+Kevin+%F0%9F%91%8B;CS+grad+from+Newcastle;Currently+building+a+mini+bank+%28and+attacking+it%29;Looking+for+2027+grad+roles+in+bank+tech" alt="Hi, I'm Kevin. CS grad from Newcastle. Currently building a mini bank (and attacking it). Looking for 2027 grad roles in bank tech." />
 
-**Software engineer · CS graduate, Newcastle University · Looking for 2027 grad roles in bank & fintech**
+**Software engineer · Newcastle University CS grad · Looking for 2027 grad roles in bank tech and fintech**
 
 <a href="https://www.linkedin.com/in/kevin-steepan/"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"></a>
 <a href="mailto:ksteepan14@icloud.com"><img src="https://img.shields.io/badge/Email-333333?style=for-the-badge&logo=icloud&logoColor=white" alt="Email"></a>
@@ -12,45 +12,47 @@
 
 ---
 
-I like problems where a number *looks* right but might not be. That's taken me into prediction markets, explainable pricing models, a from-scratch bank ledger where the books have to balance after every single test, and a dissertation on stopping AI agents from doing something stupid with money.
+I'm Kevin, a Computer Science grad from Newcastle. Most of my projects end up being about money in some way: a small bank ledger, an Airbnb price model, a tool for tracking prediction markets. My dissertation was on how to stop AI agents from making payments they shouldn't.
 
-## 🎲 Quick calibration test
+Right now I'm mostly working on Clearhouse (below).
 
-Before you scroll, try the thing my projects are built around. Make a guess, then click to check.
+## Quick quiz
+
+A few questions that came up while building these. Have a guess before opening the answer.
 
 <details>
-<summary><b>Q1.</b> I say a market has a 70% chance of YES. It resolves NO. What's my Brier score? (lower is better)</summary>
+<summary><b>Q1.</b> I say a market has a 70% chance of YES and it resolves NO. What's my Brier score? (lower is better)</summary>
 <br>
 
-**0.49.** Brier score = (forecast − outcome)², so (0.7 − 0)² = 0.49.
-If I'd hedged at 50% I'd have scored 0.25, and if I'd said 10% I'd have scored 0.01. Confidence only pays when you're right, which is exactly what [Split Decision](https://github.com/KevST14/SplitDecision) tracks over time.
+**0.49.** Brier score is (forecast − outcome)², so (0.7 − 0)² = 0.49.
+If I'd said 50% I'd have scored 0.25, and 10% would have scored 0.01. [Split Decision](https://github.com/KevST14/SplitDecision) works this out for your own guesses over time.
 </details>
 
 <details>
-<summary><b>Q2.</b> You tap "pay", your phone loses signal, and the app sends the request again. How many times should you be charged?</summary>
+<summary><b>Q2.</b> You tap "pay", lose signal, and the app sends the request again. How many times should you be charged?</summary>
 <br>
 
-**Once.** Every payment carries an *idempotency key*, so a retry returns the original transfer instead of paying twice. In [Clearhouse](https://github.com/KevST14/clearhouse) I test this by firing 20 identical requests at the same key from eight threads at once. Exactly one goes through.
+**Once.** Each payment has an *idempotency key*, so a retry gets back the original transfer instead of creating a new one. In [Clearhouse](https://github.com/KevST14/clearhouse) I test this by sending the same request 20 times from 8 threads at once. Only one goes through.
 </details>
 
 <details>
-<summary><b>Q3.</b> Pricing a London Airbnb: what helps the model more, <i>where</i> it is or <i>how the listing is written</i>?</summary>
+<summary><b>Q3.</b> When pricing a London Airbnb, what helps the model more: <i>where</i> it is, or <i>how the listing is written</i>?</summary>
 <br>
 
-**Where it is.** Adding location features (distance to stations, parks, food) pushed R² from 0.62 to 0.65. Analysing the listing text added only about £1–2 a night. Clever copywriting doesn't change much. [See for yourself in the live demo ↗](https://london-rent-reality-check-jikdwpaozdee8hvjjccgaa.streamlit.app)
+**Where it is.** Adding location features (distance to stations, parks and places to eat) took R² from 0.62 to 0.65. The listing text was only worth about £1–2 a night. You can try it in the [live demo](https://london-rent-reality-check-jikdwpaozdee8hvjjccgaa.streamlit.app).
 </details>
 
 <details>
 <summary><b>Q4.</b> An AI agent is 60% sure a payment is legit. Should it send the money?</summary>
 <br>
 
-**Not on its own.** That's the question my dissertation is about: stack independent checks, and when the agent's uncertainty crosses a threshold, it escalates to a human instead of guessing. Scroll down for the diagram.
+**Not by itself.** This is what my dissertation was about. The agent's action goes through several separate checks, and if it isn't confident enough, a human makes the call instead. There's a diagram further down.
 </details>
 
-## 🔨 Things I've built
+## Projects
 
 <details open>
-<summary><h3>🏦 Clearhouse: a tiny bank, and the fraud hiding in it</h3></summary>
+<summary><h3>Clearhouse</h3></summary>
 
 ![Java](https://img.shields.io/badge/Java_21-ED8B00?style=flat-square&logo=openjdk&logoColor=white)
 ![Spring Boot](https://img.shields.io/badge/Spring_Boot-6DB33F?style=flat-square&logo=springboot&logoColor=white)
@@ -61,11 +63,11 @@ If I'd hedged at 50% I'd have scored 0.25, and if I'd said 10% I'd have scored 0
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)
 ![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white)
 
-A small, working model of a bank's back office. A double-entry ledger moves money in whole pence with idempotency keys and row locking, a transactional outbox announces every transfer on an event stream, and a simulated town of 120 customers and 22 shops pays its way through it. Then you can launch fraud on demand (card testing, a money mule ring, an account takeover) and watch each one draw its own shape in a live control room.
+A small version of a bank's back office that I'm building to learn how payments actually work. There's a double-entry ledger (amounts stored in pence, idempotency keys, row locking), and every transfer gets published to Redpanda through a transactional outbox. A traffic generator simulates 120 customers and 22 shops spending money, and you can trigger fraud on top of that: card testing, a money mule ring, or an account takeover. Each one shows up as a different pattern in the dashboard.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/KevST14/clearhouse/main/docs/dashboard-dark.png">
-  <img alt="Clearhouse control room with three fraud attacks highlighted in the live money-flow network" src="https://raw.githubusercontent.com/KevST14/clearhouse/main/docs/dashboard-light.png">
+  <img alt="Clearhouse dashboard showing three fraud attacks in the money-flow network" src="https://raw.githubusercontent.com/KevST14/clearhouse/main/docs/dashboard-light.png">
 </picture>
 
 ```mermaid
@@ -74,20 +76,20 @@ flowchart LR
     L -->|debit, credit + event<br/>in one transaction| P[(Postgres)]
     L -->|outbox publisher| R[[Redpanda]]
     G -->|true label| K[(Answer key)]
-    G -->|live stream| D[Control room]
+    G -->|live stream| D[Dashboard]
     R -.->|next| A[AI fraud analyst]
     K -.->|scored against| A
 ```
 
-- **The books must balance:** after *every* test, every transfer nets to zero and every currency sums to zero, checked against real Postgres via Testcontainers.
-- **Learned the hard way:** optimistic locking fell over on hot accounts under an 8-thread test, so I switched to ordered pessimistic locks. CI on Linux also caught a nanosecond-vs-microsecond timestamp bug my Mac never showed.
-- **Next up:** a dbt/DuckDB pipeline over the event stream, then an AI fraud analyst graded on precision and recall against the answer key.
+- After every test, each transfer has to net to zero and each currency has to sum to zero. The tests run against a real Postgres using Testcontainers, not a mock.
+- Optimistic locking kept failing on busy accounts in an 8-thread test, so I switched to pessimistic locks taken in a fixed order. CI on Linux also caught a timestamp bug (nanoseconds vs microseconds) that never showed up on my Mac.
+- Next I'm adding a dbt/DuckDB pipeline over the event stream, then an AI fraud analyst that gets scored on precision and recall against the generator's answer key.
 
-**[→ View repo](https://github.com/KevST14/clearhouse)**
+**[View repo](https://github.com/KevST14/clearhouse)**
 </details>
 
 <details>
-<summary><h3>📈 Split Decision: can you beat a prediction market?</h3></summary>
+<summary><h3>Split Decision</h3></summary>
 
 ![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white)
 ![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white)
@@ -95,7 +97,7 @@ flowchart LR
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)
 ![SQLite](https://img.shields.io/badge/SQLite-003B57?style=flat-square&logo=sqlite&logoColor=white)
 
-Watches Polymarket, snapshots prices on a schedule, and alerts when odds swing hard. The fun part: lock in your own probability *before* you see the market price, then get scored against the real outcome.
+Pulls prices from Polymarket on a schedule, stores snapshots in SQLite and flags markets where the odds move a lot. You can also enter your own probability before seeing the market price, and once the market resolves you get a Brier score, so you can see whether you'd have beaten it.
 
 ```mermaid
 flowchart LR
@@ -106,28 +108,30 @@ flowchart LR
     B --> F
 ```
 
-**[→ View repo](https://github.com/KevST14/SplitDecision)**
+**[View repo](https://github.com/KevST14/SplitDecision)**
 </details>
 
 <details>
-<summary><h3>🏠 Rent Reality Check: is that Airbnb a fair price?</h3></summary>
+<summary><h3>Rent Reality Check</h3></summary>
 
 ![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white)
 ![scikit-learn](https://img.shields.io/badge/scikit--learn-F7931E?style=flat-square&logo=scikitlearn&logoColor=white)
 ![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=flat-square&logo=streamlit&logoColor=white)
 ![SHAP](https://img.shields.io/badge/SHAP-explainable_AI-555555?style=flat-square)
 
-Give it a London short-let and it predicts a fair nightly price from Inside Airbnb and OpenStreetMap data, then shows *why* with a SHAP breakdown. It's spatially cross-validated, so it can't cheat by memorising neighbourhoods.
+Predicts a fair nightly price for a London Airbnb listing using Inside Airbnb and OpenStreetMap data, and uses SHAP to show which features pushed the price up or down. I used spatial cross-validation so the model is always tested on areas it hasn't seen. Without that it can memorise neighbourhoods and look better than it really is.
 
-| R² (held-out) | Median error | Mean error |
+Results on held-out areas:
+
+| R² | Median error | Mean error |
 |:---:|:---:|:---:|
 | **0.72** | **22%** | **~£60/night** |
 
-**[→ Try the live demo](https://london-rent-reality-check-jikdwpaozdee8hvjjccgaa.streamlit.app)** · **[View repo](https://github.com/KevST14/london-rent-reality-check)**
+**[Try the live demo](https://london-rent-reality-check-jikdwpaozdee8hvjjccgaa.streamlit.app)** · **[View repo](https://github.com/KevST14/london-rent-reality-check)**
 </details>
 
 <details>
-<summary><h3>📰 Patch Notes: patch notes for the tech world</h3></summary>
+<summary><h3>Patch Notes</h3></summary>
 
 ![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white)
 ![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white)
@@ -135,33 +139,30 @@ Give it a London short-let and it predicts a fair nightly price from Inside Airb
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)
 ![SQLite](https://img.shields.io/badge/SQLite-003B57?style=flat-square&logo=sqlite&logoColor=white)
 
-A personal news dashboard that pulls the day's stories from Hacker News, Lobsters, GitHub and a dozen outlets, groups coverage of the same story, learns what you care about, and spots the names that are suddenly everywhere. No accounts, no API keys, no tracking.
+A news dashboard I built for myself. It pulls stories from Hacker News, Lobsters, GitHub and about a dozen news sites, then groups articles about the same story into one card. The grouping uses TF-IDF similarity on headlines with extra weight on names, so three outlets covering one earnings call get merged but two unrelated "critical flaw" stories don't.
 
 ![Patch Notes today view](https://raw.githubusercontent.com/KevST14/patchnotes/main/docs/today.jpg)
 
-- **Story clustering:** TF-IDF headline similarity with name boosting and centroid matching, so three outlets covering one earnings call become one card, while two different "critical flaw" stories stay apart.
-- **An explainable "For You" feed:** a transparent average over keeps, skips and saves that tells you *why* each story is there. No black box.
-- **Trend radar:** terms showing up more than usual across at least two sources, measured against a per-source baseline so a fresh install doesn't think everything is exploding.
-- **Plus:** a swipeable catch-up deck with hand-rolled spring physics, and a weekly headline quiz.
+It also learns from what I keep, skip and save, and shows the reason each story is in my feed. There's a trending section for terms that suddenly appear across more than one source, compared against each source's normal baseline so a fresh install doesn't flag everything. I added a swipe-through catch-up mode and a weekly headline quiz too, mostly because they were fun to build. No sign-up, no API keys and no tracking.
 
-**[→ View repo](https://github.com/KevST14/patchnotes)**
+**[View repo](https://github.com/KevST14/patchnotes)**
 </details>
 
 <details>
-<summary><h3>💷 SpendSync: personal finance dashboard</h3></summary>
+<summary><h3>SpendSync</h3></summary>
 
 ![Next.js](https://img.shields.io/badge/Next.js-000000?style=flat-square&logo=nextdotjs&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=flat-square&logo=postgresql&logoColor=white)
 ![Prisma](https://img.shields.io/badge/Prisma-2D3748?style=flat-square&logo=prisma&logoColor=white)
 
-Track spending and income, set category budgets and savings goals, and automate recurring transactions, all behind a typed, Zod-validated REST API.
+A personal finance app for tracking income and spending, with category budgets, savings goals and recurring transactions. Built on Next.js and Prisma, with Zod validating everything that comes into the REST API.
 
-**[→ View repo](https://github.com/KevST14/SpendSync)**
+**[View repo](https://github.com/KevST14/SpendSync)**
 </details>
 
 <details>
-<summary><h3>🎓 Dissertation: when should an AI agent stop and ask?</h3></summary>
+<summary><h3>Dissertation</h3></summary>
 
 *Design and Evaluation of a Layered Safety Architecture for Autonomous Financial Execution Agents* (2026)
 
@@ -173,10 +174,10 @@ flowchart LR
     B -->|fails a check| E[Block]
 ```
 
-Rather than trusting one model to get it right, the architecture puts independent checks between the agent and the money and treats uncertainty as a reason to hand over to a human.
+The idea is that you shouldn't rely on one model always getting it right. Every action the agent proposes goes through a set of independent checks. If they all pass and the agent is confident, it goes ahead. If one fails, it's blocked. If the agent isn't sure, a human decides.
 </details>
 
-## 🧰 Toolkit
+## Tools I use
 
 <div align="center">
 
@@ -184,7 +185,7 @@ Rather than trusting one model to get it right, the architecture puts independen
 
 </div>
 
-## 🐍 Contributions
+## Contributions
 
 <div align="center">
 <picture>
@@ -196,5 +197,5 @@ Rather than trusting one model to get it right, the architecture puts independen
 ---
 
 <div align="center">
-<i>Happy to chat about markets, models, ledgers, or agents that know their limits.</i>
+<i>If you're hiring for grad roles in bank tech or fintech, or just want to talk about any of this, my email and LinkedIn are at the top.</i>
 </div>
